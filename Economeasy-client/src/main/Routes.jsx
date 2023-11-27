@@ -2,7 +2,7 @@ import { Navigate, Routes, Route } from 'react-router-dom'
 
 import Home  from '../components/home/Home'
 import ContactRegister from "../components/user/ContactRegister";
-import LoginPage from "../components/LoginPage/LoginPage";
+import LoginPage from '../pages/loginPage/LoginPage'
 
 export default function RoutesApp () {
     return (
