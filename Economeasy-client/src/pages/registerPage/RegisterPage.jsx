@@ -54,9 +54,10 @@ const RegisterPage = () => {
                                         onBlur={handleBlur}
                                         value={values.email}
                                         placeholder='example@email.com'
-                                    />
+                                        />
+                                    <span>
                                     {errors.email && touched.email && errors.email}
-
+                                    </span>
                                 </div>
                                 <div className='textfield'>
                                 <label >Senha</label>
@@ -68,7 +69,9 @@ const RegisterPage = () => {
                                         value={values.password}
                                         placeholder='********'
                                     />
+                                    <span>
                                     {errors.password && touched.password && errors.password}
+                                    </span>
                                 </div>
                                 <button className="btn-login" type="submit" disabled={isSubmitting}>
                                     Cadastrar

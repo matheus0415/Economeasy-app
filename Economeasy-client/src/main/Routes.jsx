@@ -9,7 +9,7 @@ export default function RoutesApp () {
         <Routes>
             <Route path='/' element={<RegisterPage/>} />
             <Route path='/loginPage' element={<LoginPage/>} />
-            <Route path='/registerPage' element={<RegisterPage/>} />
+            {/* <Route path='/registerPage' element={<RegisterPage/>} /> */}
             <Route path='*' element={<Navigate replace to='/' />} />
         </Routes>
     )

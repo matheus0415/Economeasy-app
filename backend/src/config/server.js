@@ -35,11 +35,11 @@ server.get("/test-db-connection", (req, res) => {
 server.post("/register", (req,res) => { //cadastrar conta
     const { name } = req.body;
     const { email } = req.body;
-    const { phone } = req.body;
+    const { password } = req.body;
 
-    let SQL = "INSERT INTO account (name, email, telefone ) VALUES ( ?,?,? )";
+    let SQL = "INSERT INTO account (name, email, password ) VALUES ( ?,?,? )";
 
-    db.query(SQL, [name, email, phone], (err, result) => {
+    db.query(SQL, [name, email, password], (err, result) => {
         console.log(err);
     })
 })
