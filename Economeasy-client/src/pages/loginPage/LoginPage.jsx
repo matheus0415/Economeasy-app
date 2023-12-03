@@ -70,10 +70,10 @@ const LoginPage = () => {
                                     </span>
                                 </div>
                                 <button className="btn-login" type="submit" disabled={isSubmitting}>
-                                    Cadastrar
+                                    Entrar
                                 </button>
                             </form>
-                            <p>Ainda não possui uma conta? <Link to="/registerPage">Registre-se aqui</Link></p>
+                            <p>Ainda não possui uma conta? <Link to="/registerPage">Clique aqui para se registrar</Link></p>
                         </div>
                     )}
                 </Formik>
