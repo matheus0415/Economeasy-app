@@ -53,7 +53,7 @@ const RegisterPage = () => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.email}
-                                        placeholder='example@email.com'
+                                        placeholder='exemplo@email.com'
                                         />
                                     <span>
                                     {errors.email && touched.email && errors.email}
@@ -71,6 +71,20 @@ const RegisterPage = () => {
                                     />
                                     <span>
                                     {errors.password && touched.password && errors.password}
+                                    </span>
+                                </div>
+                                <div className='textfield'>
+                                <label >Confirmar Senha</label>
+                                    <input
+                                        type="password"
+                                        name="passwordConfirm"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.passwordConfirm}
+                                        placeholder='********'
+                                    />
+                                    <span>
+                                    {errors.passwordConfirm && touched.passwordConfirm && errors.passwordConfirm}
                                     </span>
                                 </div>
                                 <button className="btn-login" type="submit" disabled={isSubmitting}>
