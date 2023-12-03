@@ -23,6 +23,15 @@ const RegisterPage = () => {
                         ) {
                             errors.email = 'Email inválido!';
                         }
+                        else if (!values.password) {
+                            errors.password = 'Campo obrigatorio!';
+                        }
+                        else if (!values.passwordConfirm) {
+                            errors.passwordConfirm = 'Campo obrigatorio!';
+                        }
+                        else if (values.password != values.passwordConfirm){
+                            errors.passwordConfirm = 'As senhas não correspondem!'
+                        }
                         return errors;
                     }}
                     
