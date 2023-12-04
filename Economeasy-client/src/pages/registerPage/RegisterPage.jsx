@@ -8,7 +8,7 @@ import Axios from "axios"
 const RegisterPage = () => {
 
     const handleClickRegister = (values) => {
-        Axios.post("https://localhost:3003/register", {
+        Axios.post("http://localhost:3003/register", {
             email: values.email,
             password: values.password
         }).then((response) => {
@@ -24,7 +24,7 @@ const RegisterPage = () => {
 
             <div className='card-login'>
                 <Formik
-                    initialValues={{ email: '', password: '' }}
+                    initialValues={{ email: '', password: '', passwordConfirm: '' }}
                     validate={values => {
                         const errors = {};
                         if (!values.email) {
@@ -47,14 +47,7 @@ const RegisterPage = () => {
                     }}
 
                     onSubmit={handleClickRegister}
-                    //     (values, { setSubmitting }) => {
-                    //     handleClickRegister(values);
-                    //     setTimeout(() => {
-                    //         handleClickRegister();
-                    //         alert(JSON.stringify(values, null, 2));
-                    //         setSubmitting(false);
-                    //     }, 400);
-                    // }
+                    
                     
                 >
                     {({

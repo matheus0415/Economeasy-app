@@ -6,8 +6,8 @@ const cors = require("cors")
 const db = mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "password",
-    database: "economeasydb",
+    password: "12345678",
+    database: "econom_db",
 })
 
 const port = 3003
@@ -32,17 +32,17 @@ server.get("/test-db-connection", (req, res) => {
 });
 
 server.post("/register", (req, res) => { //cadastrar conta
-    const { email } = req.body.email;
-    const { password } = req.body.password;
+    const  email  = req.body.email;
+    const  password  = req.body.password;
 
     let SQL = "INSERT INTO users ( email, password ) VALUES ( ?,? )";
 
-    db.query("SELECT * FROM users where email = ?", [email], (err, res) => {
+    db.query("SELECT * FROM users where email = ?", [email], (err, result) => {
         if (err) {
             res.send(err);
         }
         if (result.length == 0) {
-            db.query(SQL, [email, password], (err, res) => {
+            db.query(SQL, [email, password], (err, result) => {
                 if (err) {
 
                     res.send(err)
@@ -51,7 +51,7 @@ server.post("/register", (req, res) => { //cadastrar conta
             })
         }
         else {
-            result.send({msg: "Usuario já cadastrado!"});
+            res.send({msg: "Usuario já cadastrado!"});
         }
     })
 });

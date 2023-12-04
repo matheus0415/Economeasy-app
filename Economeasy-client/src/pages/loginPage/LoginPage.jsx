@@ -7,7 +7,7 @@ import Axios from 'axios'
 const LoginPage = () => {
 
     const handleClickLogin = (values) => {
-        Axios.post("https://localhost:3003/login", {
+        Axios.post("http://localhost:3003/login", {
             email: values.email,
             password: values.password,
         }).then((response) => {
