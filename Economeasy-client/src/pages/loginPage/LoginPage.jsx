@@ -2,8 +2,22 @@ import { Formik } from 'formik'
 import React from 'react'
 import './style.css'
 import { Link } from 'react-router-dom'
+import Axios from 'axios'
 
 const LoginPage = () => {
+
+    const handleClickLogin = (values) => {
+        Axios.post("https://localhost:3003/login", {
+            email: values.email,
+            password: values.password,
+        }).then((response) => {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });;
+    }
+
+
     return (
         <div className='main'>
 
@@ -22,12 +36,7 @@ const LoginPage = () => {
                         return errors;
                     }}
                     
-                    onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
-                        }, 400);
-                    }}
+                    onSubmit={handleClickLogin}
                 >
                     {({
                         values,

@@ -2,11 +2,22 @@ import { Formik } from 'formik'
 import React from 'react'
 import './style.css'
 import { Link } from 'react-router-dom'
+import Axios from "axios"
 
 
 const RegisterPage = () => {
 
-    
+    const handleClickRegister = (values) => {
+        Axios.post("https://localhost:3003/register", {
+            email: values.email,
+            password: values.password
+        }).then((response) => {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });;
+    }
+
 
     return (
         <div className='main'>
@@ -29,18 +40,22 @@ const RegisterPage = () => {
                         else if (!values.passwordConfirm) {
                             errors.passwordConfirm = 'Campo obrigatorio!';
                         }
-                        else if (values.password != values.passwordConfirm){
+                        else if (values.password != values.passwordConfirm) {
                             errors.passwordConfirm = 'As senhas não correspondem!'
                         }
                         return errors;
                     }}
+
+                    onSubmit={handleClickRegister}
+                    //     (values, { setSubmitting }) => {
+                    //     handleClickRegister(values);
+                    //     setTimeout(() => {
+                    //         handleClickRegister();
+                    //         alert(JSON.stringify(values, null, 2));
+                    //         setSubmitting(false);
+                    //     }, 400);
+                    // }
                     
-                    onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
-                        }, 400);
-                    }}
                 >
                     {({
                         values,
@@ -63,13 +78,13 @@ const RegisterPage = () => {
                                         onBlur={handleBlur}
                                         value={values.email}
                                         placeholder='exemplo@email.com'
-                                        />
+                                    />
                                     <span>
-                                    {errors.email && touched.email && errors.email}
+                                        {errors.email && touched.email && errors.email}
                                     </span>
                                 </div>
                                 <div className='textfield'>
-                                <label >Senha</label>
+                                    <label >Senha</label>
                                     <input
                                         type="password"
                                         name="password"
@@ -79,11 +94,11 @@ const RegisterPage = () => {
                                         placeholder='********'
                                     />
                                     <span>
-                                    {errors.password && touched.password && errors.password}
+                                        {errors.password && touched.password && errors.password}
                                     </span>
                                 </div>
                                 <div className='textfield'>
-                                <label >Confirmar Senha</label>
+                                    <label >Confirmar Senha</label>
                                     <input
                                         type="password"
                                         name="passwordConfirm"
@@ -93,7 +108,7 @@ const RegisterPage = () => {
                                         placeholder='********'
                                     />
                                     <span>
-                                    {errors.passwordConfirm && touched.passwordConfirm && errors.passwordConfirm}
+                                        {errors.passwordConfirm && touched.passwordConfirm && errors.passwordConfirm}
                                     </span>
                                 </div>
                                 <button className="btn-login" type="submit" disabled={isSubmitting}>

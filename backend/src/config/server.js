@@ -6,8 +6,8 @@ const cors = require("cors")
 const db = mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "12345678",
-    database: "econom_db",
+    password: "password",
+    database: "economeasydb",
 })
 
 const port = 3003
@@ -15,7 +15,7 @@ const port = 3003
 server.use(cors())
 server.use(express.json())
 
-server.listen(port, function() {
+server.listen(port, function () {
     console.log(`Backend is running on port ${port}`)
 })
 
@@ -31,15 +31,45 @@ server.get("/test-db-connection", (req, res) => {
     });
 });
 
+server.post("/register", (req, res) => { //cadastrar conta
+    const { email } = req.body.email;
+    const { password } = req.body.password;
 
-server.post("/register", (req,res) => { //cadastrar conta
-    const { name } = req.body;
-    const { email } = req.body;
-    const { password } = req.body;
+    let SQL = "INSERT INTO users ( email, password ) VALUES ( ?,? )";
 
-    let SQL = "INSERT INTO account (name, email, password ) VALUES ( ?,?,? )";
+    db.query("SELECT * FROM users where email = ?", [email], (err, res) => {
+        if (err) {
+            res.send(err);
+        }
+        if (result.length == 0) {
+            db.query(SQL, [email, password], (err, res) => {
+                if (err) {
 
-    db.query(SQL, [name, email, password], (err, result) => {
-        console.log(err);
+                    res.send(err)
+                }
+                res.send({ msg: "Cadastrado com sucesso!"})
+            })
+        }
+        else {
+            result.send({msg: "Usuario já cadastrado!"});
+        }
     })
-})
+});
+
+server.post("/login", (req, res) => {
+    const  email  = req.body.email;
+    const  password  = req.body.password;
+
+    db.query("SELECT * FROM users where email = ? AND password = ?", [email, password], (err, result) => {
+        if (err) {
+            res.send(err);
+        }
+        if(result.length > 0){
+            res.send({msg: "Usuário Logado com sucesso"})
+        }else {
+            res.send({msg: "Usuário não encontrado"})
+        }
+    })    
+});
+
+
